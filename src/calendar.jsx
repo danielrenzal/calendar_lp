@@ -4,19 +4,17 @@ import './calendar.scss';
 
 
 class Calendar extends Component{
-    constructor(){
-        super();
+    constructor(prop){
+        super(prop);
 
         this.weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+        const date = new Date();
+        date.setMonth(prop.month);        
         this.state = {
-            current_day: new Date()
+            current_day: date
         }
-    }
-
-    changeCurrentDay = (day) => {
-        this.setState({current_day: new Date(day.year, day.month, day.number)});
     }
 
     render(){
@@ -34,7 +32,7 @@ class Calendar extends Component{
                             ))
                         }
                     </div>
-                    <CalendarDays today={current_day} changeCurrentDay={this.changeCurrentDay} />
+                    <CalendarDays today={current_day} spreadEvent={this.props.spreadEvent} events={this.props.events}/>
                 </div>
             </div>
         )

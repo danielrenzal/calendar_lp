@@ -1,71 +1,78 @@
+.App{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  position: relative;
+}
+
 .calendar {
-    width: 900px;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-  }
+  width: fit-content;
+}
   
-  .calendar_header {
-    height: 100px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
+.calendar_header {
+  text-align: center;
+}
   
-  .calendar_body {
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .table_header {
-    height: 100px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  .weekday {
-    width: 100px;
+.table_header {
+  margin-bottom: 1.2em;
+  span{
+    display: inline-block;
+    width: 3em;
     text-align: center;
   }
-  
-  .table_content {
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    box-sizing: border-box;
+}
+
+.table_content {
+  display: grid;
+  grid-template-columns: repeat(7, 3em);
+  place-items: center;
+  row-gap: 3px;
+
+  .calendar_day{
+    width: 3em;
+    text-align: center;
   }
-  
-  .calendar_day {
-    width: 125px;
-    height: 75px;
-    position: relative;
-    border: 1px solid #a6a6a6;
-  }
-  
-  .calendar_day:hover {
-    background-color: rgba(0,0,0,.10);
-  }
+}
+
   
   .calendar_day p {
-    position: absolute;
-    right: 10px;
     color: #a6a6a6;
+    display: none;
   }
   
   .current p {
     color: #000000;
+    display: block;
   }
-  
-  .selected{
-    background-color: #e1c7c7;
-    p {
-        color: #cc0000;
-        font-weight: bold;
-      }
+
+  .start{
+    background-color: rgb(247, 92, 118);
+    border-radius: 10px 0 0 10px;
   }
+
+  .end{
+    background-color: rgb(247, 92, 118);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .between{
+    background-color: rgb(255, 183, 195);
+  }
+
+  .start_only{
+    border-radius: 50%;
+    background-color: rgb(247, 92, 118);
+  }
+
+.modal{
+  box-shadow: 1px 1px 4px black;
+  height: fit-content;
+  text-align: end;
+  padding: 1em;
+  position: absolute;
+  background-color: white;
+}
+
+.close_modal{
+  display: none;
+}
