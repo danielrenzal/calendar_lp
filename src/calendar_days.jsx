@@ -38,18 +38,44 @@ class CalendarDays extends Component{
              * sakaling may event sa  date na ito
              */
             for(let i=0; i<events.length; i++){
+                const start_date = new Date(events[i].start);
+                const end_date = new Date(events[i].end);
                 switch(events[i].calendar_display){
                     case "peek":
-                        if(events[i].start === number && events[i].month === month){
+                        if(start_date.getDate() === number && start_date.getMonth() === month){
                             calendar_day = {...calendar_day, label: "start_only", event_day: "cohort", index: i, is_clickable: true};
                         }
                         break;
                     case "full":
-                        if(events[i].start === number && events[i].month === month){
+                        /**determines the start and end date of an event */
+                        if(start_date.getDate() === number && start_date.getMonth() === month){
                             calendar_day = {...calendar_day, label: "start"}
-                        }else if(events[i].end === number && events[i].month === month){
+                        }
+                        else if(end_date.getDate() === number && end_date.getMonth() === month){
                             calendar_day = {...calendar_day, label: "end"}
-                        }else if(number > events[i].start && number < events[i].end && events[i].month === month){
+                        }
+
+                        /** if the event is in the same month... */
+                        if(start_date.getMonth() === end_date.getMonth()){
+                            if(number > start_date.getDate() && number < end_date.getDate() && start_date.getMonth() === month){
+                                calendar_day = {...calendar_day, label: "between"}
+                            }
+                        }
+                        /** if not... */
+                        else{
+                            if(number > start_date.getDate() && start_date.getMonth() === month){
+                                calendar_day = {...calendar_day, label: "between"}
+                            }
+
+                            if(number < end_date.getDate() && end_date.getMonth() === month){
+                                calendar_day = {...calendar_day, label: "between"}
+                            }
+                        }
+
+                        /** if the month we're looping is in between of the month for start of event 
+                         * and the end of event
+                        */
+                        if(month > start_date.getMonth() && month < end_date.getMonth()){
                             calendar_day = {...calendar_day, label: "between"}
                         }
                         break;

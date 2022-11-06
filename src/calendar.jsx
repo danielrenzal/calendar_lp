@@ -10,22 +10,17 @@ class Calendar extends Component{
         this.weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-        const date = new Date();
+        this.date = new Date();
         /** set what month to show*/
-        date.setMonth(prop.month);      
-        // date.setFullYear(2019);
-        this.state = {
-            current_day: date
-        }
+        this.date.setMonth(prop.month);
     }
 
     render(){
-        const { current_day } = this.state;
         return(
             <div className="calendar">
                 <div className="calendar_header">
                     {/* display month and year */}
-                    <h2>{this.months[current_day.getMonth()]} {current_day.getFullYear()}</h2>
+                    <h2>{this.months[this.date.getMonth()]} {this.date.getFullYear()}</h2>
                 </div>
                 <div className="calendar_body">
                     <div className="table_header">
@@ -36,7 +31,7 @@ class Calendar extends Component{
                         }
                     </div>
                     {/* mismong dates na */}
-                    <CalendarDays today={current_day} spreadEvent={this.props.spreadEvent} events={this.props.events}/>
+                    <CalendarDays today={this.date} spreadEvent={this.props.spreadEvent} events={this.props.events}/>
                 </div>
             </div>
         )
