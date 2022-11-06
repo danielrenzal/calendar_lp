@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-
+/** pansamantalang modal */
 class EventModal extends Component{
     render(){
         const { x, y, modal_state, closeModal } = this.props;

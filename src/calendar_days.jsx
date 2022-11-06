@@ -6,16 +6,18 @@ class CalendarDays extends Component{
     render(){
         const { today, events } = this.props;
 
-        let firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); // Nov 1, 2022
-        let weekdayOfFirstDay = firstDayOfMonth.getDay(); // 2 (Tue)
-        let currentDays = [];
+        let firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); //sample value: Nov 1, 2022
+        let weekdayOfFirstDay = firstDayOfMonth.getDay(); // sample value: 2 (Tue yung katumbas)
+        let currentDays = []; //dates will be stored here (will be used to render the dates)
     
+        /** loop to insert sa array sa taas. 42 kasi bali 42 blocks */
         for (let day=0; day<42; day++){
             if(day === 0 && weekdayOfFirstDay === 0){
-                firstDayOfMonth.setDate(1); //first block if day 1 is on sunday
+                firstDayOfMonth.setDate(1); //first block value if day 1 is on sunday
             }
             else if(day === 0){
-                firstDayOfMonth.setDate(firstDayOfMonth.getDate() - weekdayOfFirstDay); //first blocks of the past month
+                //set yung date sa past month if ever na yung date 1 is not sunday
+                firstDayOfMonth.setDate(firstDayOfMonth.getDate() - weekdayOfFirstDay); 
             }
             else{
                 firstDayOfMonth.setDate(firstDayOfMonth.getDate() + 1); //succeeding block
@@ -32,6 +34,9 @@ class CalendarDays extends Component{
     
             let {number, month} = calendar_day;
     
+            /** loop to add some extra properties para magamit sa pagdisplay sa calendar kung
+             * sakaling may event sa  date na ito
+             */
             for(let i=0; i<events.length; i++){
                 switch(events[i].calendar_display){
                     case "peek":
@@ -54,6 +59,7 @@ class CalendarDays extends Component{
                 
             }
     
+            /** pushing to the array */
             currentDays = [...currentDays, calendar_day];
         }
     
