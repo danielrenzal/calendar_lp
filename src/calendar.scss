@@ -1,14 +1,18 @@
-.App{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  position: relative;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+.year_calendar{
+  background-color: #1e1e1e;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  width: 1086px;
 }
 
-.calendar {
-  width: fit-content;
+.month_calendar{
+  color: rgba(255, 255, 255, 0.88);
 }
-  
+
 .calendar_header {
   text-align: center;
 }
@@ -31,6 +35,7 @@
   .calendar_day{
     width: 3em;
     text-align: center;
+    position: relative;
   }
 }
 
@@ -41,38 +46,40 @@
   }
   
   .current p {
-    color: #000000;
     display: block;
+    color: rgba(255, 255, 255, 0.88);
   }
 
   .start{
-    background-color: rgb(247, 92, 118);
+    background-color: rgba(139, 52, 130, 1);
+    color: #fff;
     border-radius: 10px 0 0 10px;
   }
 
   .end{
-    background-color: rgb(247, 92, 118);
+    background-color: rgba(139, 52, 130, 1);
     border-radius: 0 10px 10px 0;
+    color: #fff;
   }
 
   .between{
-    background-color: rgb(255, 183, 195);
+    background-color: rgba(139, 52, 130, .2);
   }
 
   .start_only{
     border-radius: 50%;
-    background-color: rgb(247, 92, 118);
+    background-color: rgba(139, 52, 130, 1);
   }
 
 .modal{
-  box-shadow: 1px 1px 4px black;
+  background-color: #333333;
+  border: 1px solid rgba(129, 160, 234, 1);
+  border-radius: 2px;
   height: fit-content;
   text-align: end;
   padding: 1em;
   position: absolute;
-  background-color: white;
-}
-
-.close_modal{
-  display: none;
+  z-index: 1;
+  bottom: 3.5em;
+  left: 0;
 }

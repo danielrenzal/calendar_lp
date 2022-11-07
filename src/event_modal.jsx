@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 
 /** pansamantalang modal */
 class EventModal extends Component{
+
+    closeEvent = (event) => {
+        this.props.closeModal(event);
+        this.props.hideEvent(0);
+    }
+
     render(){
-        const { x, y, modal_state, closeModal } = this.props;
+        const { event } = this.props;
         return(
-            <div className={`${modal_state} modal`} style={{top: `${y}px`, left: `${x}px`}}>
-                <button onClick={closeModal}>close</button>
-                <p>Event infos...</p>
+            <div className="modal">
+                <button onClick={e => this.closeEvent(e)}>close</button>
+                <p>{event.event_type}</p>
             </div>
         )
     }
