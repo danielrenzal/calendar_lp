@@ -6,13 +6,17 @@ class CalendarDays extends Component{
         open_modal: false
     }
 
+    /** 
+    *	DOCU: Adds event details (if there's any) on every date <br>
+    *	Triggered by the render method <br>
+    *	Last updated at: November 07, 2022
+    *	@param {object} calendar_day an object that contains date infos from a Date object
+    *	@author Daniel
+    */
     addEvents = (calendar_day) => {
         let {month, date, year} = calendar_day;
         const { events } = this.props;
     
-        /** loop to add some extra properties para magamit sa pagdisplay sa calendar kung
-         * sakaling may event sa  date na ito
-         */
         for(let i=0; i<events.length; i++){
             const event_start = new Date(events[i].start);
             const event_end = new Date(events[i].end);
@@ -23,6 +27,7 @@ class CalendarDays extends Component{
                         if(event_start.getDate() === date && event_start.getMonth() === month){
                             calendar_day = {...calendar_day, label: "start_only", event: events[i], is_clickable: true};
                         }
+
                         break;
                     case "full":
                         /** Mark the start and end of an event */
@@ -33,11 +38,14 @@ class CalendarDays extends Component{
                         }
     
                         /** Mark the in between dates */
+                        /** If the event spans on one month only */
                         if(event_start.getMonth() === event_end.getMonth()){
                             if(date > event_start.getDate() && date < event_end.getDate() && month === event_start.getMonth()){
                                 calendar_day = {...calendar_day, label: "between"}
                             }
-                        }else{
+                        }
+                        /** If the event spans for two months */
+                        else{
                             if(date > event_start.getDate() && month === event_start.getMonth()){
                                 calendar_day = {...calendar_day, label: "between"}
                             }
@@ -46,12 +54,11 @@ class CalendarDays extends Component{
                                 calendar_day = {...calendar_day, label: "between"}
                             }
                         }
-    
+                        /** If the event spans for more than two months */
                         if(month > event_start.getMonth() && month < event_end.getMonth()){
                             calendar_day = {...calendar_day, label: "between"}
                         }
-                        
-    
+                
                         break;
                     default:
                         /** nothing */
@@ -63,11 +70,25 @@ class CalendarDays extends Component{
         return calendar_day;
     }
 
+    /** 
+    *	DOCU: Triggers the spreadEvent method from YearCalendar component and opens the modal trough setState. <br>
+    *	Triggered by an onClick method from the render method <br>
+    *	Last updated at: November 07, 2022
+    *	@param {number} event_id passed on the spreadEvent method
+    *	@author Daniel
+    */
     showEvent = (event_id) => {
         this.props.spreadEvent(event_id);
         this.setState({open_modal: true});
     }
 
+    /** 
+    *	DOCU: Closes the modal through setState. <br>
+    *	Passed on the EventModal Component <br>
+    *	Last updated at: November 07, 2022
+    *	@param {object} event used to call the stopPropagation method
+    *	@author Daniel
+    */
     closeModal = (event) => {
         event.stopPropagation();
         this.setState({open_modal: false});
@@ -78,7 +99,8 @@ class CalendarDays extends Component{
         let reset_month = new Date(whole_date);
         /** Get the week day of the first day of the month */
         let week_day = reset_month.getDay(); 
-        let currentDays = []; //dates will be stored here (will be used to render the dates)
+        /** Dates will be stored here (will be used to render the dates) */
+        let currentDays = []; 
     
         /** Loop to 42 calendar blocks (dates) */
         for (let block=0; block<42; block++){
@@ -99,11 +121,8 @@ class CalendarDays extends Component{
                 current_month: (reset_month.getMonth() === whole_date.getMonth()),
                 date: reset_month.getDate(),
                 month: reset_month.getMonth(),
-                number: reset_month.getDate(),
                 year: reset_month.getFullYear()
             }
-    
-            
     
             /** pushing to the array */
             currentDays = [...currentDays, this.addEvents(calendar_day)];
@@ -114,13 +133,19 @@ class CalendarDays extends Component{
                 {
                     currentDays.map((day, index) => (
                         <div key={index} 
-                            className={`calendar_day
-                                        ${day.current_month ? " current":""}
-                                        ${day.label ? day.label:""}`}
+                            className={`calendar_day ${day.current_month ? " current":"not_current"} ${day.label ? day.label:""}`}
                             {...(day.is_clickable && {onClick: () => this.showEvent(day.event.id)})}
                                         >
-                        <p>{day.number}</p>
-                        {this.state.open_modal && day.is_clickable && <EventModal closeModal={this.closeModal} hideEvent={hideEvent} event={day.event} />}
+                        <p>{day.date}</p>
+                        {
+                            this.state.open_modal && 
+                            day.is_clickable && 
+                            <EventModal 
+                                closeModal={this.closeModal}
+                                hideEvent={hideEvent} 
+                                event={day.event} 
+                            />
+                        }
                         </div>
                     ))
                 }
