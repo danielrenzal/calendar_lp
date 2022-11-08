@@ -20,8 +20,8 @@ class App extends Component{
     modal_position_y: 300,
     modal_state: "close_modal",
     events: [
-      {id: 1, start: "2022-03-15", end: "2022-04-25", event_type: "cohort", calendar_display: "peek"},
-      {id: 2, start: "2022-05-17", end: "2022-06-04", event_type: "break", calendar_display: "full"}
+      {id: 1, start: 4, end: 10, month: 2, event_type: "cohort", calendar_display: "peek"},
+      {id: 2, start: 15, end: 18, month: 5, event_type: "break", calendar_display: "full"}
     ],
     opened_event_state: null
   }
