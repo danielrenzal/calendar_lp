@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import CalendarDays from './calendar_days';
-import './calendar.scss';
+import './month_calendar.scss';
 
 
 class MonthCalendar extends Component{

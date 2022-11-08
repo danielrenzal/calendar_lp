@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventModal from './event_modal';
+import './calendar_days.scss';
 
 class CalendarDays extends Component{
     state = {

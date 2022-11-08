@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;600;700&display=swap');
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+select{
+	margin-top: 10em;
+}
+
+.year_calendar{
+	background-color: #1e1e1e;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	font-family: 'Inter', sans-serif;
+	font-size: 12px;
+	width: 1086px;
+}

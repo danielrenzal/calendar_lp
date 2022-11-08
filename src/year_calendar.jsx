@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MonthCalendar from "./month_calendar";
+import './year_calendar.scss';
 
 class YearCalendar extends Component{
 
