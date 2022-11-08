@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 /** pansamantalang modal */
-class EventModal extends Component{
+class EventTooltip extends Component{
     constructor(prop){
         super(prop);
         this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -23,7 +23,10 @@ class EventModal extends Component{
                     <button onClick={e => this.closeEvent(e)}>close</button>
                 </div>
                 <div className="modal_event">
-                    <p>{event.event_type}</p>
+                    <p>
+                        <span className="event_color_dot" style={{backgroundColor: `rgba(${event.color.r}, ${event.color.g}, ${event.color.b}, 1)`}}></span>
+                        {event.event_type}
+                    </p>
                     <button className="edit">edit</button>
                 </div>
                 <div className="modal_date">
@@ -36,4 +39,4 @@ class EventModal extends Component{
     }
 }
 
-export default EventModal;
+export default EventTooltip;
