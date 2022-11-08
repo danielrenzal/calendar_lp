@@ -14,11 +14,12 @@ class YearCalendar extends Component{
     years: [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015],
     selected_year: new Date().getFullYear(),
     events: [
-      {id: 1, start: "2022-02-04", end: "2022-02-10", event_type: "cohort", color: ""},
-      {id: 2, start: "2022-09-26", end: "2022-11-04", event_type: "break",  color: ""},
-      {id: 3, start: "2022-08-14", end: "2022-08-20", event_type: "break",  color: ""},
-      {id: 4, start: "2021-01-22", end: "2021-02-5", event_type: "break",  color: ""},
-      {id: 4, start: "2022-01-01", end: "2022-01-01", event_type: "holiday", color: ""},
+		{id: 1, start: "2022-02-04", end: "2022-02-10", event_type: "cohort", color: {r: 240, g: 159, b: 0}},
+		{id: 2, start: "2022-09-26", end: "2022-11-04", event_type: "break",  color: {r: 139, g: 52, b: 130}},
+		{id: 3, start: "2022-08-14", end: "2022-08-20", event_type: "training",  color: {r: 139, g: 52, b: 130}},
+		{id: 4, start: "2021-01-22", end: "2021-02-5", event_type: "break",  color: {r: 139, g: 52, b: 130}},
+		{id: 5, start: "2022-01-01", end: "2022-01-01", event_type: "holiday", color: {r: 90, g: 102, b: 131}},
+		{id: 6, start: "2022-05-15", end: "2022-06-10", event_type: "stack", color: {r: 44, g: 107, b: 255}},
     ],
   }
 
@@ -33,7 +34,7 @@ class YearCalendar extends Component{
     const { events } = this.state;
 	for(let i=0; i<events.length; i++){
 		if(events[i].id === event_id){
-			events[i].event_type = events[i].event_type+"-range";
+			events[i] = {...events[i], show_mode: "full-range"}
 		}
 
 	}
@@ -51,7 +52,7 @@ class YearCalendar extends Component{
 	const { events } = this.state;
 	for(let i=0; i<events.length; i++){
 		if(events[i].id === event_id){
-			events[i].event_type = events[i].event_type.replace("-range", "");
+			events[i] = {...events[i], show_mode: ""}
 		}
 	}
     this.setState({events});

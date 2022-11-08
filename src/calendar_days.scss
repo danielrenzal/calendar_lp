@@ -12,6 +12,7 @@
 	height: 2.7em;
     text-align: center;
     position: relative;
+	transition: all .1s ease-in;
   }
 }
 
@@ -26,24 +27,24 @@
   }
 
   .start{
-    background-color: rgba(139, 52, 130, 1);
+    // background-color: rgba(139, 52, 130, 1);
     border-radius: 10px 0 0 10px;
     color: #fff;
     cursor: pointer;
   }
 
   .end{
-    background-color: rgba(139, 52, 130, 1);
+    // background-color: rgba(139, 52, 130, 1);
     border-radius: 0 10px 10px 0;
     color: #fff;
   }
 
   .between{
-    background-color: rgba(139, 52, 130, .1);
+    // background-color: rgba(139, 52, 130, .1);
   }
 
-  .start_only{
-	background-color: rgba(139, 52, 130, 1);
+  .start_only, .one_day{
+	// background-color: rgba(139, 52, 130, 1);
     border-radius: 50%;
 	cursor: pointer;
   }
