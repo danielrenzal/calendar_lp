@@ -23,46 +23,41 @@ class CalendarDays extends Component{
             const event_end = new Date(events[i].end);
 
             if(year === event_start.getFullYear() && year === event_end.getFullYear()){
-                switch(events[i].calendar_display){
-                    case "peek":
-                        if(event_start.getDate() === date && event_start.getMonth() === month){
-                            calendar_day = {...calendar_day, label: "start_only", event: events[i], is_clickable: true};
-                        }
+                if(events[i].event_type === "cohort" || events[i].event_type === "stack"){
+                    if(event_start.getDate() === date && event_start.getMonth() === month){
+                        calendar_day = {...calendar_day, label: "start_only", event: events[i], is_clickable: true};
+                    }
+                }
+                else if(events[i].event_type === "holiday" || events[i].event_type === "break" || events[i].event_type === "training" || events[i].event_type.includes("range")){
+                    /** Mark the start and end of an event */
+                    if(event_start.getDate() === date && event_start.getMonth() === month){
+                        calendar_day = {...calendar_day, label: "start", is_clickable: true, event: events[i]}
+                    }else if(event_end.getDate() === date && event_end.getMonth() === month){
+                        calendar_day = {...calendar_day, label: "end"}
+                    }
 
-                        break;
-                    case "full":
-                        /** Mark the start and end of an event */
-                        if(event_start.getDate() === date && event_start.getMonth() === month){
-                            calendar_day = {...calendar_day, label: "start", is_clickable: true, event: events[i]}
-                        }else if(event_end.getDate() === date && event_end.getMonth() === month){
-                            calendar_day = {...calendar_day, label: "end"}
-                        }
-    
-                        /** Mark the in between dates */
-                        /** If the event spans on one month only */
-                        if(event_start.getMonth() === event_end.getMonth()){
-                            if(date > event_start.getDate() && date < event_end.getDate() && month === event_start.getMonth()){
-                                calendar_day = {...calendar_day, label: "between"}
-                            }
-                        }
-                        /** If the event spans for two months */
-                        else{
-                            if(date > event_start.getDate() && month === event_start.getMonth()){
-                                calendar_day = {...calendar_day, label: "between"}
-                            }
-    
-                            if(date < event_end.getDate() && month === event_end.getMonth()){
-                                calendar_day = {...calendar_day, label: "between"}
-                            }
-                        }
-                        /** If the event spans for more than two months */
-                        if(month > event_start.getMonth() && month < event_end.getMonth()){
+                    /** Mark the in between dates */
+                    /** If the event spans on one month only */
+                    if(event_start.getMonth() === event_end.getMonth()){
+                        if(date > event_start.getDate() && date < event_end.getDate() && month === event_start.getMonth()){
                             calendar_day = {...calendar_day, label: "between"}
                         }
-                
-                        break;
-                    default:
-                        /** nothing */
+                    }
+                    /** If the event spans for two months */
+                    else{
+                        if(date > event_start.getDate() && month === event_start.getMonth()){
+                            calendar_day = {...calendar_day, label: "between"}
+                        }
+
+                        if(date < event_end.getDate() && month === event_end.getMonth()){
+                            calendar_day = {...calendar_day, label: "between"}
+                        }
+                    }
+                    
+                    /** If the event spans for more than two months */
+                    if(month > event_start.getMonth() && month < event_end.getMonth()){
+                        calendar_day = {...calendar_day, label: "between"}
+                    }
                 }
             }
             
