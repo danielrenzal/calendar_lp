@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EventModal from './event_modal';
+import EventTooltip from './event_tooltip';
 import './calendar_days.scss';
 
 class CalendarDays extends Component{
@@ -151,7 +151,7 @@ class CalendarDays extends Component{
                                     {
                                         this.state.open_modal_id === day.date && 
                                         day.is_clickable &&
-                                        <EventModal 
+                                        <EventTooltip 
                                             closeModal={this.closeModal}
                                             hideEvent={hideEvent} 
                                             event={day.event} 

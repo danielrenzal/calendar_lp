@@ -19,7 +19,8 @@ class YearCalendar extends Component{
 		{id: 3, start: "2022-08-14", end: "2022-08-20", event_type: "training",  color: {r: 139, g: 52, b: 130}},
 		{id: 4, start: "2021-01-22", end: "2021-02-5", event_type: "break",  color: {r: 139, g: 52, b: 130}},
 		{id: 5, start: "2022-01-01", end: "2022-01-01", event_type: "holiday", color: {r: 90, g: 102, b: 131}},
-		{id: 6, start: "2022-05-15", end: "2022-06-10", event_type: "stack", color: {r: 44, g: 107, b: 255}},
+		{id: 6, start: "2022-05-15", end: "2022-06-30", event_type: "stack", color: {r: 44, g: 107, b: 255}},
+		{id: 7, start: "2022-06-19", end: "2022-06-30", event_type: "cohort", color: {r: 240, g: 159, b: 0}},
     ],
   }
 

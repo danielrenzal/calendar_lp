@@ -75,6 +75,15 @@
 	.modal_event{
 		display: flex;
 		justify-content: space-between;
+
+		.event_color_dot{
+			display: inline-block;
+			height: 1em;
+			width: 1em;
+			border-radius: 50%;
+			vertical-align: middle;
+			margin-right: 1em;
+		}
 	}
 
 	.modal_date{
