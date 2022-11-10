@@ -1,0 +1,109 @@
+.tooltip{
+	font-size: 14px;
+	font-family: 'Poppins', sans-serif;
+	background-color: #333333;
+	border: 1px solid rgba(129, 160, 234, 1);
+	border-radius: 5px;
+	padding: 20px;
+	position: absolute;
+	z-index: 3;
+	bottom: calc(100% + 3px);
+	left: 100%;
+	width: 356px;
+
+	&::after{
+		content: "";
+		position: fixed;
+		top: 0;
+		height: 100vh;
+		left: 0;
+		width: 100%;
+		z-index: -1;
+		cursor: default;
+	}
+
+	.tooltip_header{
+		display: flex;
+		justify-content: space-between;
+		
+	}
+
+	.tooltip_event_section{
+		display: flex;
+		justify-content: space-between;
+        margin-bottom: 1.1em;
+		margin-top: 2em;
+        padding: 0 2px;
+
+		.event_color_dot{
+			display: inline-block;
+			height: 1.2em;
+			width: 1.2em;
+			border-radius: 50%;
+			margin-right: 1.3em;
+            vertical-align: middle;
+		}
+
+        .event_name{
+            text-transform: capitalize;
+        }
+	}
+
+	.tooltip_date_section{
+		display: flex;
+		gap: 5px;
+        padding: 0 2px;
+	}
+
+  .full_date{
+	font-size: 14px;
+	font-weight: 600;
+  }
+}
+
+.close_btn{
+    background: url("images/icons.png") no-repeat -65px -1px;
+    border: none;
+	width: 14px;
+	height: 14px;
+    cursor: pointer;
+}
+
+.edit_btn{
+    background: url("images/icons.png") no-repeat -47px -1px;
+    border: none;
+	width: 16px;
+	height: 16px;
+    cursor: pointer;
+}
+
+.calendar_icon{
+    background: url("images/icons.png") no-repeat -25px -5px;
+    border: none;
+    margin-right: 1em;
+	width: 16px;
+	height: 16px;
+}
+
+hr{
+	border: none;
+	background-color: rgba(95, 95, 95, 1);
+	height: 1px;
+	margin-top: 1.5em;
+}
+
+.cohort{
+	background-color: rgb(240, 159, 0);
+}
+
+.stack{
+	background-color: rgb(44, 107, 255);
+}
+
+.holiday{
+	background-color: rgb(90, 102, 131);
+}
+
+.break, .training{
+	background-color: rgb(139, 52, 130);
+}

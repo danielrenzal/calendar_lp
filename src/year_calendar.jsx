@@ -3,7 +3,6 @@ import MonthCalendar from "./month_calendar";
 import './year_calendar.scss';
 
 class YearCalendar extends Component{
-
   constructor(){
     super();
     /** Used to loop months */
@@ -11,56 +10,71 @@ class YearCalendar extends Component{
   }
   
   state = {
-    years: [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015],
+	years: [2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015],
     selected_year: new Date().getFullYear(),
-    events: [
-		{id: 1, start: "2022-02-04", end: "2022-02-10", event_type: "cohort", color: {r: 240, g: 159, b: 0}},
-		{id: 2, start: "2022-09-26", end: "2022-11-04", event_type: "break",  color: {r: 139, g: 52, b: 130}},
-		{id: 3, start: "2022-08-14", end: "2022-08-20", event_type: "training",  color: {r: 139, g: 52, b: 130}},
-		{id: 4, start: "2021-01-22", end: "2021-02-5", event_type: "break",  color: {r: 139, g: 52, b: 130}},
-		{id: 5, start: "2022-01-01", end: "2022-01-01", event_type: "holiday", color: {r: 90, g: 102, b: 131}},
-		{id: 6, start: "2022-05-15", end: "2022-06-30", event_type: "stack", color: {r: 44, g: 107, b: 255}},
-		{id: 7, start: "2022-06-19", end: "2022-06-30", event_type: "cohort", color: {r: 240, g: 159, b: 0}},
+    course_calendar_events: [
+		{id: 1, start: "2022-02-04", end: "2022-04-13", event_type: "cohort"},
+		{id: 12, start: "2022-02-04", end: "2022-02-18", event_type: "stack"},
+		{id: 2, start: "2022-09-26", end: "2022-11-04", event_type: "break"},
+		{id: 3, start: "2022-08-09", end: "2022-08-20", event_type: "training"},
+		{id: 9, start: "2022-08-16", end: "2022-08-31", event_type: "cohort"},
+		{id: 4, start: "2021-01-22", end: "2021-02-5", event_type: "break"},
+		{id: 5, start: "2022-01-01", end: "2022-01-01", event_type: "holiday"},
+		{id: 7, start: "2022-06-19", end: "2022-06-30", event_type: "cohort"},
+		{id: 8, start: "2022-06-19", end: "2022-06-25", event_type: "stack"},
+		{id: 6, start: "2022-05-15", end: "2022-06-30", event_type: "stack"},
+		{id: 10, start: "2022-10-10", end: "2022-10-28", event_type: "stack"},
+		{id: 11, start: "2022-04-14", end: "2022-04-14", event_type: "holiday"},
     ],
   }
 
   /** 
-   *	DOCU: Spans out a 'hidden' event when clicked <br>
+   *	DOCU: Spans out a 'shrinked' event when clicked <br>
    *	Passed as prop to the calendar_days component <br>
-   *	Last updated at: November 07, 2022
-   *	@param {number} event_id of the clicked event
+   *	Last updated at: November 10, 2022
+   *	@param {array} calendar_events Required. These are the opened events
    *	@author Daniel
   */
-  spreadEvent = ( event_id ) => {
-    const { events } = this.state;
-	for(let i=0; i<events.length; i++){
-		if(events[i].id === event_id){
-			events[i] = {...events[i], show_mode: "full-range"}
-		}
+  expandCalendarEvent = ( calendar_events ) => {
+    let { course_calendar_events } = this.state;
 
+	for(let i=0; i<calendar_events.length; i++){
+		course_calendar_events = course_calendar_events.map(event => {
+			if(calendar_events[i].id === event.id){
+				event = {...event, show_mode: "full-range"}
+			}
+			return event;
+		})
 	}
-    this.setState({events});
+
+    this.setState({course_calendar_events});
   }
 
   /** 
-   *	DOCU: 'Hides' a spanned out event when its modal is closed <br>
+   *	DOCU: 'Shrinks' a spanned event when its modal is closed <br>
    *	Passed as prop to the calendar_days component <br>
-   *	Last updated at: November 07, 2022
-   *	@param {number} event_id of the clicked event
+   *	Last updated at: November 10, 2022
+   *	@param {array} calendar_events Required. These are the opened events
    *	@author Daniel
   */
-  hideEvent = ( event_id ) => {
-	const { events } = this.state;
-	for(let i=0; i<events.length; i++){
-		if(events[i].id === event_id){
-			events[i] = {...events[i], show_mode: ""}
-		}
+  shrinkCalendarEvent = ( calendar_events ) => {
+	let { course_calendar_events } = this.state;
+
+	for(let i=0; i<calendar_events.length; i++){
+		course_calendar_events = course_calendar_events.map(event => {
+			if(calendar_events[i].id === event.id && event.show_mode){
+				event = {...event, show_mode: ""}
+			}
+			return event;
+		})
 	}
-    this.setState({events});
+	
+
+    this.setState({course_calendar_events});
   }
 
   render(){
-    const {events, years, selected_year} = this.state;
+    const {course_calendar_events, years, selected_year} = this.state;
     return (
       <React.Fragment>
 		<select defaultValue={selected_year} onChange={(e) => this.setState({selected_year: e.target.value})}>
@@ -70,15 +84,15 @@ class YearCalendar extends Component{
 				))
 			}
 		</select>
-		<div className="year_calendar">
+		<div id="year_calendar_container">
 			{
 				this.months.map(month => (
 					<MonthCalendar 
 						year={selected_year} 
 						month={month} 
-						spreadEvent={this.spreadEvent} 
-						hideEvent={this.hideEvent} 
-						events={events} key={month}
+						expandCalendarEvent={this.expandCalendarEvent} 
+						shrinkCalendarEvent={this.shrinkCalendarEvent} 
+						course_calendar_events={course_calendar_events} key={month}
 					/>
 				))
 			}

@@ -6,12 +6,14 @@ import './month_calendar.scss';
 class MonthCalendar extends Component{
     constructor(prop){
         super(prop);
+
+        //move to constants or use moment
         this.weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         this.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     }
 
     render(){
-        const { month, year, spreadEvent, hideEvent, events } = this.props;
+        const { month, year, expandCalendarEvent, shrinkCalendarEvent, course_calendar_events } = this.props;
         return(
             <div className="month_calendar">
                 <div className="calendar_header">
@@ -30,9 +32,9 @@ class MonthCalendar extends Component{
                     {/* Display date blocks (in a calendar) */}
                     <CalendarDays 
                         whole_date={new Date(year, month, 1)} 
-                        spreadEvent={spreadEvent} 
-                        hideEvent={hideEvent} 
-                        events={events}
+                        expandCalendarEvent={expandCalendarEvent} 
+                        shrinkCalendarEvent={shrinkCalendarEvent} 
+                        course_calendar_events={course_calendar_events}
                     />
                 </div>
             </div>
