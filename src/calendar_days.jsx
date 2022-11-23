@@ -33,7 +33,8 @@ class CalendarDays extends Component{
                             ...calendar_day, 
                             label: "one_day", 
                             is_clickable: true, 
-                            events: [...calendar_day.events, events[i]]
+                            events: [...calendar_day.events, events[i]],
+                            pending_events_count: (events[i].status === "pending" ? calendar_day.pending_events_count+1 : calendar_day.pending_events_count)
                         }
                     }
                     else if(event_start.getDate() === date && event_start.getMonth() === month){
@@ -42,6 +43,7 @@ class CalendarDays extends Component{
                             label: "start_only",
                             is_clickable: true,
                             events: [...calendar_day.events, events[i]],
+                            pending_events_count: (events[i].status === "pending" ? calendar_day.pending_events_count+1 : calendar_day.pending_events_count)
                         };
                     }
                 }
@@ -52,7 +54,8 @@ class CalendarDays extends Component{
                             ...calendar_day,
                             label: "one_day", 
                             is_clickable: true, 
-                            events: [...calendar_day.events, events[i]]
+                            events: [...calendar_day.events, events[i]],
+                            pending_events_count: (events[i].status === "pending" ? calendar_day.pending_events_count+1 : calendar_day.pending_events_count)
                         }
                     }
                     else if(event_start.getDate() === date && event_start.getMonth() === month){
@@ -60,7 +63,8 @@ class CalendarDays extends Component{
                             ...calendar_day, 
                             label: "start", 
                             is_clickable: true, 
-                            events: [...calendar_day.events, events[i]]
+                            events: [...calendar_day.events, events[i]],
+                            pending_events_count: (events[i].status === "pending" ? calendar_day.pending_events_count+1 : calendar_day.pending_events_count)
                         }
                     }
                     else if(event_end.getDate() === date && event_end.getMonth() === month){
@@ -169,13 +173,15 @@ class CalendarDays extends Component{
                 month: reset_month.getMonth(),
                 year: reset_month.getFullYear(),
                 full_date: reset_month,
-                events: []
+                events: [],
+                pending_events_count: 0
             }
             
             /** pushing to the array */
             current_days = [...current_days, this.addEventsToDate(calendar_day)];
+
         }
-    
+        
         return (
             <div className="table_content">
                 {
@@ -183,7 +189,7 @@ class CalendarDays extends Component{
                         if(day.current_month){
                             return (
                                 <div key={index} 
-                                    className={`calendar_day ${day.events.length ? day.events[day.events.length-1].event_type: ""} ${day.label ? day.label:""}`}
+                                    className={`calendar_day ${day.events.length ? day.events[day.events.length-1].event_type: ""} ${day.label ? day.label:""} ${day.events.length ? day.events[day.events.length-1].status: ""}`}
                                     {...(day.is_clickable && {onClick: () => this.showEventsOfADate((day.events), day.date)})}>
                                     {day.date}
                                     {
@@ -197,6 +203,10 @@ class CalendarDays extends Component{
                                             shrinkCalendarEvent={shrinkCalendarEvent} 
                                             events={day.events} 
                                         />
+                                    }
+                                    {
+                                        day.pending_events_count > 1 &&
+                                        <span className="pending_events_count">{day.pending_events_count}</span>
                                     }
                                 </div>
                             )

@@ -23,7 +23,7 @@ class EventTooltip extends Component{
         const { date, month, year, events } = this.props;
         
         return(
-            <div className="tooltip">
+            <div className="date_tooltip">
                 <div className="tooltip_header">
                     <p className="full_date">{this.months[month]} {date}, {year}</p>
                     <button className="close_btn" onClick={e => this.closeTooltip(e)}></button>
@@ -45,7 +45,8 @@ class EventTooltip extends Component{
                                 <div className="tooltip_date_section">
                                     <span className="calendar_icon"></span>
                                     {
-                                        start_date.toDateString() === end_date.toDateString() ?
+                                        start_date.toDateString() === end_date.toDateString() 
+                                        ?
                                         <p>{this.months[start_date.getMonth()]} {start_date.getDate()}, {start_date.getFullYear()}</p>
                                         :
                                         <React.Fragment>
@@ -55,6 +56,14 @@ class EventTooltip extends Component{
                                         </React.Fragment>
                                     }
                                 </div>
+                                {
+                                    (event.status === "pending")
+                                    &&
+                                    <div className="tooltip_approve_reject_section">
+                                        <button className="reject_event">Reject</button>
+                                        <button className="approve_event">Approve</button>
+                                    </div>
+                                }
                             </React.Fragment>
                         )
                     })

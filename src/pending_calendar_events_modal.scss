@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+#pending_calendar_events_modal{
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-width: 869px;
+
+    .modal-content{
+        min-width: 869px;
+        margin: 0;
+    }
+
+    .modal-header{
+        height: 51px;
+        background-color: #333333;
+        border-bottom: none;
+        border-radius: 2px 2px 0 0;
+        padding-inline: 25px;
+    }
+
+    .modal-body{
+        background-color: #292929;
+        border-radius: 0 0 2px 2px;
+        padding: 20px;
+    }
+
+    .modal_title{
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    button{
+        border: none;
+    }
+
+    .pending_events_calendar_modal_subheader{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .approve_all_pending_events_btn,
+    .approve_pending_btn{
+        color: #81A0EA;
+        background-color: #484B50;
+        border-radius: 4px;
+        padding: 8.5px 10px;
+    }
+
+    .pending_events_table{
+        width: 100%;
+
+        thead{
+            border-bottom: 1px solid #626262;
+        }
+
+        th{
+            background-color: #4b4b4b;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 10px 20px;
+            &:not(th:first-child){
+                text-align: center;
+            }
+        }
+
+        tr{
+            background-color: #333333;
+            border-bottom: 1px solid rgb(81, 81, 81);
+            &:last-child{
+                border: none;
+            }
+        }
+
+        td{
+            padding: 10px 20px;
+            
+            &:not(td:first-child){
+                text-align: center;
+            }
+        }
+        
+        .program_cell, .stack_cell{
+            font-size: 12px;
+        }
+
+        .date_cell, .actions_cell{
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .actions_cell{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .view_in_calendar_btn,
+        .reject_pending_btn{
+            background-color: transparent;
+            color: rgba(129, 160, 234, 0.88);
+        }
+    }
+}
